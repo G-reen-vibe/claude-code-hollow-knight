@@ -50,9 +50,10 @@ godot --path .
 godot --headless --path . --import
 godot --headless --path . res://tests/test_runner.tscn    # engine/combat integration tests
 godot --headless --path . res://tests/test_attacks.tscn   # every boss attack move
+godot --headless --path . res://tests/test_rush_flow.tscn # boss-rush progression flow
 ```
 
-Both exit non-zero on failure.
+All exit non-zero on failure.
 
 ## Project layout
 
