@@ -1,0 +1,250 @@
+[gd_scene load_steps=6 format=3 uid="uid://main00000001"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="Script" path="res://scripts/rooms/dungeon.gd" id="2_dungeon"]
+[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="3_player"]
+[ext_resource type="Script" path="res://scripts/ui/hud.gd" id="4_hud"]
+[ext_resource type="Script" path="res://scripts/ui/inventory_ui.gd" id="5_inv"]
+
+[node name="Main" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_main")
+
+[node name="Dungeon" type="Node2D" parent="."]
+process_mode = 1
+script = ExtResource("2_dungeon")
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+process_mode = 1
+
+[node name="Camera" type="Camera2D" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="HUD" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource("4_hud")
+
+[node name="TopLeft" type="VBoxContainer" parent="UI/HUD"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 12.0
+offset_right = 260.0
+offset_bottom = 110.0
+
+[node name="HpBar" type="ProgressBar" parent="UI/HUD/TopLeft"]
+custom_minimum_size = Vector2(240, 22)
+layout_mode = 2
+max_value = 100.0
+value = 100.0
+show_percentage = false
+
+[node name="HpLabel" type="Label" parent="UI/HUD/TopLeft/HpBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 12
+
+[node name="ManaBar" type="ProgressBar" parent="UI/HUD/TopLeft"]
+custom_minimum_size = Vector2(240, 16)
+layout_mode = 2
+max_value = 100.0
+value = 100.0
+show_percentage = false
+modulate = Color(0.6, 0.75, 1, 1)
+
+[node name="ManaLabel" type="Label" parent="UI/HUD/TopLeft/ManaBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 10
+
+[node name="GoldLabel" type="Label" parent="UI/HUD/TopLeft"]
+layout_mode = 2
+text = "Gold: 0"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 0.85, 0.25, 1)
+
+[node name="TopRight" type="VBoxContainer" parent="UI/HUD"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -320.0
+offset_top = 12.0
+offset_right = -16.0
+offset_bottom = 40.0
+alignment = 2
+
+[node name="DepthLabel" type="Label" parent="UI/HUD/TopRight"]
+layout_mode = 2
+text = "Dark Forest — Room 1"
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 14
+
+[node name="Bottom" type="VBoxContainer" parent="UI/HUD"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -86.0
+offset_right = 200.0
+offset_bottom = -8.0
+alignment = 2
+
+[node name="SlotRack" type="HBoxContainer" parent="UI/HUD/Bottom"]
+layout_mode = 2
+alignment = 1
+
+[node name="WandLabel" type="Label" parent="UI/HUD/Bottom"]
+layout_mode = 2
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 11
+modulate = Color(1, 1, 1, 0.75)
+
+[node name="BossBar" type="ProgressBar" parent="UI/HUD"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -260.0
+offset_top = 46.0
+offset_right = 260.0
+offset_bottom = 68.0
+max_value = 650.0
+value = 650.0
+show_percentage = false
+modulate = Color(1, 0.45, 0.45, 1)
+visible = false
+
+[node name="BossLabel" type="Label" parent="UI/HUD/BossBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Giant Spider"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 12
+
+[node name="Message" type="Label" parent="UI/HUD"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 90.0
+offset_right = 300.0
+offset_bottom = 120.0
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(1, 0.95, 0.7, 1)
+
+[node name="Inventory" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+visible = false
+script = ExtResource("5_inv")
+
+[node name="Dim" type="ColorRect" parent="UI/Inventory"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.55)
+
+[node name="Panel" type="PanelContainer" parent="UI/Inventory"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -330.0
+offset_top = -220.0
+offset_right = 330.0
+offset_bottom = 220.0
+
+[node name="VBox" type="VBoxContainer" parent="UI/Inventory/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="UI/Inventory/Panel/VBox"]
+layout_mode = 2
+text = "Spell Inventory"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 20
+
+[node name="Hint" type="Label" parent="UI/Inventory/Panel/VBox"]
+layout_mode = 2
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 12
+modulate = Color(1, 1, 1, 0.8)
+
+[node name="Wands" type="VBoxContainer" parent="UI/Inventory/Panel/VBox"]
+layout_mode = 2
+
+[node name="BagScroll" type="ScrollContainer" parent="UI/Inventory/Panel/VBox"]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+
+[node name="BagGrid" type="GridContainer" parent="UI/Inventory/Panel/VBox/BagScroll"]
+layout_mode = 2
+columns = 10
+
+[node name="Overlay" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+visible = false
+
+[node name="OverlayDim" type="ColorRect" parent="UI/Overlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.7)
+
+[node name="Panel" type="PanelContainer" parent="UI/Overlay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = -120.0
+offset_right = 260.0
+offset_bottom = 120.0
+
+[node name="VBox" type="VBoxContainer" parent="UI/Overlay/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="UI/Overlay/Panel/VBox"]
+layout_mode = 2
+text = "You Died"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 30
+
+[node name="Body" type="Label" parent="UI/Overlay/Panel/VBox"]
+layout_mode = 2
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 14

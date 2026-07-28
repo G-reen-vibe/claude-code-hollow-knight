@@ -1,5 +1,4 @@
-# Godot
+# Godot 4 cache/imports
 .godot/
-*.tmp
-export.cfg
-export_credentials.cfg
+*.import
+export_presets.cfg

@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://player0000001"]
+
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_player"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_body"]
+radius = 10.0
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 1
+collision_mask = 8
+motion_mode = 1
+script = ExtResource("1_player")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_body")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+
+[node name="WandPivot" type="Node2D" parent="."]
+
+[node name="WandSprite" type="Sprite2D" parent="WandPivot"]
+position = Vector2(14, 0)
+scale = Vector2(1.5, 1.5)
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 1
+collision_mask = 16
+
+[node name="HurtShape" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_body")
